@@ -12,7 +12,7 @@ def toggle_status():
     status = not status
     if status:
         status_label.config(text="Status: Playing")
-        root.after(100, play_pause_loop)  # Start the play/pause loop
+        root.after(100, play_pause_loop)
     else:
         status_label.config(text="Status: Paused")
 
@@ -33,7 +33,7 @@ def play_pause_loop():
             key.release(' ')
         key.press('d')
         key.release('d')
-    root.after(100, play_pause_loop)  # Schedule the next execution of play_pause_loop
+    root.after(100, play_pause_loop)
 
 def stop_program():
     global status
@@ -50,7 +50,6 @@ def get_focused_window_title():
     except Exception as e:
         return f"Error: {e}"
 
-# Set up the GUI
 root = tk.Tk()
 root.title("Play/Pause Controller")
 root.geometry("200x200")
