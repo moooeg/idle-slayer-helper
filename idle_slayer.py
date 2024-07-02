@@ -1,24 +1,29 @@
 import tkinter as tk
 from pynput.keyboard import Controller
-import time
 import pygetwindow as gw
 
 key = Controller()
 status = False
 jump = False
+game = "Idle Slayer"
 
 def toggle_status():
     global status
     status = not status
+    window = gw.getWindowsWithTitle(game)
+    print(window)
+    window[0].activate()
     if status:
         status_label.config(text="Status: Playing")
-        root.after(100, play_pause_loop)
+        root.after(100, play_pause_loop)  # Start the play/pause loop
     else:
         status_label.config(text="Status: Paused")
 
 def jump_status():
     global jump
     jump = not jump
+    window = gw.getWindowsWithTitle(game)
+    window[0].activate()
     if jump:
         jump_label.config(text="Auto jump: On")
     else:
@@ -26,14 +31,15 @@ def jump_status():
 
 def play_pause_loop():
     title = get_focused_window_title()
-    print(title)
-    if status and title == "Idle Slayer":
+    if status and title == game:
         if jump:
             key.press(' ')
             key.release(' ')
         key.press('d')
         key.release('d')
-    root.after(100, play_pause_loop)
+    if not (game in gw.getAllTitles()):
+        root.destroy()
+    root.after(100, play_pause_loop)  # Schedule the next execution of play_pause_loop
 
 def stop_program():
     global status
@@ -50,9 +56,11 @@ def get_focused_window_title():
     except Exception as e:
         return f"Error: {e}"
 
+# Set up the GUI
 root = tk.Tk()
 root.title("Play/Pause Controller")
 root.geometry("200x200")
+root.attributes("-topmost", True)
 
 play_pause_button = tk.Button(root, text="Play/Pause", command=toggle_status)
 play_pause_button.pack(pady=10)
