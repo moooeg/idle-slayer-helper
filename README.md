@@ -5,6 +5,8 @@ This is designed for idling in the game Idle Slayer.
 ## Features
 
 - **Auto Sprint and Jump**: Automatically sprints and jumps.
+- **Auto Focus**: Automatically focus back to idle slayer when change setting.
+- **Auto Shut down**: Automatically close program when idle slayer is closed
 
 ## How to Use
 
@@ -17,5 +19,6 @@ This is designed for idling in the game Idle Slayer.
 
 - The program will only send inputs when focusing on Idle Slayer. (In case it messed up your essay! lol)
 - DO NOT unlock the Random box and chest hunt key upgradation for smoothest idling.
+- Run Idle slayer before launching this helper
 
 Enjoy
